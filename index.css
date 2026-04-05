@@ -65,11 +65,10 @@ nav a.active{
 @media(max-width:995px){
     nav{
         position: absolute;
-        display: flex;
+        display: none;
         top: 0;
         right: 0;
-        width: auto;
-        gap: 1.5rem;
+        width: 40%;
         border-left: 3px solid #b74b4b;
         border-bottom: 3px solid #b74b4b;
         border-bottom-left-radius: 2rem;
