@@ -43,6 +43,10 @@ header{
     font-weight: 800;
     cursor: pointer;
     transition: 0.5s ease;
+    background: linear-gradient(45deg, #ffOA6C, #2D27FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
 .logo:hover{
