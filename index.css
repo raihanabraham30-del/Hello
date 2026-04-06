@@ -43,7 +43,7 @@ header{
     font-weight: 800;
     cursor: pointer;
     transition: 0.5s ease;
-    background: linear-gradient(45deg, #4c067a, #fe3d6c);
+    background: linear-gradient(45deg, #59cde9, #0A2A88, #59cde9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
