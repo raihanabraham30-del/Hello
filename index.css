@@ -39,13 +39,13 @@ header{
 
 .logo{
     font-size: 3rem;
-    color: #b74b4b;
+    color: #f5f5f5;
     font-weight: 800;
     cursor: pointer;
     transition: 0.5s ease;
-    background: linear-gradient(45deg, #59cde9, #0A2A88, #59cde9);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: linear-gradient(45deg, #59cde9, #0A2A88, #59cde9)
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
     display: inline-block;
 }
 
@@ -152,6 +152,7 @@ span{
 
 .social-icons a{
     display: inline-flex;
+    color: #f5f5f5;
     justify-content: center;
     align-items: center;
     width: 4rem;
