@@ -39,7 +39,7 @@ header{
 
 .logo{
     font-size: 3rem;
-    color: #00eeff;
+    color: #f5f5f5;
     font-weight: 800;
     cursor: pointer;
     transition: 0.5s ease;
@@ -63,8 +63,8 @@ nav a{
 
 nav a:hover,
 nav a.active{
-   color: #00eeff; 
-   border-bottom: 3px solid #00eeff;
+   color: #f5f5f5; 
+   border-bottom: 3px solid #f5f5f5;
 }
 @media(max-width:995px){
     nav{
@@ -123,7 +123,7 @@ section{
 }
 
 span{
-    color: #f5f5f5;
+    color: #00eeff;
 }
 
 .home-content h3{
@@ -199,7 +199,7 @@ span{
 
 .typing-text span::before{
     content: "software developer";
-    color: #f5f5f5;
+    color: #00eeff;
     animation: words 20s infinite;
 }
 
