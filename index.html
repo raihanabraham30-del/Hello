@@ -1,47 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="index.css">
-    <title>homepage website</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Keamanan: Simulasi Login</title>
+    <style>
+        body { font-family: sans-serif; background: #1a1a1a; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: #2a2a2a; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); width: 300px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #007bff; border: none; color: white; border-radius: 5px; cursor: pointer; }
+        #message { margin-top: 15px; padding: 10px; border-radius: 5px; font-size: 0.9em; min-height: 20px; }
+        .danger { background: #ff4d4d; color: white; }
+        .success { background: #2ecc71; color: white; }
+        .code-hint { font-family: monospace; color: #aaa; font-size: 0.8em; margin-top: 10px; display: block; }
+    </style>
 </head>
 <body>
-   <header>
-       <a href="#" class="logo">Hans</a>
-       
-       <nav>
-           <a href="#" class="active">Home</a>
-           <a href="#" >Services</a>
-           <a href="#" >Skills</a>
-           <a href="#" >Education</a>
-           <a href="#" >Contact</a>
 
-       </nav>
-   </header> 
-   <section class="home">
-       <div class="home-img">
-           <img src="p.jpg" alt="">           
-       </div>                  
-       <div class="home-content">
-           <h1>Hi, It's <span>Hans</span></h1>
-           <h3 class="typing-text">I'm a <span></span></h3>
-           <p>This is my first website, so sorry if there are any bugs.</p>
-      <div class="social-icons">
-    <a href="https://www.linkedin.com/in/usernameanda" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+<div class="login-card">
+    <h3>🔐 Admin Login</h3>
+    <input type="text" id="username" placeholder="Username (Coba: admin)">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="prosesLogin()">Login</button>
     
-    <a href="https://github.com/raihanabraham30-del" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+    <div id="message"></div>
     
-    <a href="https://www.instagram.com/rai.hans67" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
-    
-    <a href="https://www.tiktok.com/@akuadalahhan?_r=1&_t=ZS-95J7D6OOSzU" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i></a>
+    <div class="code-hint">
+        <b>Payload SQLi:</b> <br> ' OR '1'='1 <br><br>
+        <b>Payload XSS:</b> <br> &lt;img src=x onerror=alert('Hacked')&gt;
+    </div>
 </div>
 
-<div>
-    <a href="#" class="btn">Play a game!</a>
-</div>
+<script>
+    function prosesLogin() {
+        const user = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
+        const msg = document.getElementById('message');
+
+        // --- SIMULASI CELAH SQL INJECTION ---
+        // Logika: Jika mengandung tanda petik dan OR 1=1, kita anggap tembus.
+        if (user.includes("' OR '1'='1") || pass.includes("' OR '1'='1")) {
+            msg.className = "success";
+            msg.innerHTML = "🔓 <b>BERHASIL SQLi!</b> Login Bypass aktif.";
+            return;
+        }
+
+        // --- SIMULASI CELAH XSS ---
+        // Bahaya: Menggunakan innerHTML tanpa filter
+        if (user.includes("<img") || user.includes("<script")) {
+            msg.className = "danger";
+            msg.innerHTML = "⚠️ Terdeteksi Input: " + user; // Di sini XSS akan meledak
+            return;
+        }
+
+        // Logika Login Normal
+        if (user === "admin" && pass === "raihan123") {
+            msg.className = "success";
+            msg.innerHTML = "✅ Selamat datang, Raihan!";
+        } else {
+            msg.className = "danger";
+            msg.innerHTML = "❌ Login Gagal!";
+        }
+    }
+</script>
 
 </body>
 </html>
+
