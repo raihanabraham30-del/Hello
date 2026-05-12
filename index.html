@@ -1,69 +1,33 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab Keamanan: Simulasi Login</title>
+    <title>Lab Defacement Raihan</title>
     <style>
-        body { font-family: sans-serif; background: #1a1a1a; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .login-card { background: #2a2a2a; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); width: 300px; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background: #007bff; border: none; color: white; border-radius: 5px; cursor: pointer; }
-        #message { margin-top: 15px; padding: 10px; border-radius: 5px; font-size: 0.9em; min-height: 20px; }
-        .danger { background: #ff4d4d; color: white; }
-        .success { background: #2ecc71; color: white; }
-        .code-hint { font-family: monospace; color: #aaa; font-size: 0.8em; margin-top: 10px; display: block; }
+        body { font-family: sans-serif; text-align: center; padding: 50px; transition: 0.5s; }
+        .container { border: 2px solid #333; padding: 20px; border-radius: 15px; }
+        input { padding: 10px; width: 80%; margin-bottom: 10px; }
+        button { padding: 10px 20px; cursor: pointer; background: #007bff; color: white; border: none; }
     </style>
 </head>
 <body>
 
-<div class="login-card">
-    <h3>🔐 Admin Login</h3>
-    <input type="text" id="username" placeholder="Username (Coba: admin)">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="prosesLogin()">Login</button>
-    
-    <div id="message"></div>
-    
-    <div class="code-hint">
-        <b>Payload SQLi:</b> <br> ' OR '1'='1 <br><br>
-        <b>Payload XSS:</b> <br> &lt;img src=x onerror=alert('Hacked')&gt;
+    <div class="container" id="box">
+        <h1 id="judul">Selamat Datang di Web Saya</h1>
+        <p id="deskripsi">Silakan masukkan nama kamu di bawah ini:</p>
+        
+        <input type="text" id="userInput" placeholder="Tulis sesuatu...">
+        <br>
+        <button onclick="proses()">Kirim Data</button>
     </div>
-</div>
 
-<script>
-    function prosesLogin() {
-        const user = document.getElementById('username').value;
-        const pass = document.getElementById('password').value;
-        const msg = document.getElementById('message');
-
-        // --- SIMULASI CELAH SQL INJECTION ---
-        // Logika: Jika mengandung tanda petik dan OR 1=1, kita anggap tembus.
-        if (user.includes("' OR '1'='1") || pass.includes("' OR '1'='1")) {
-            msg.className = "success";
-            msg.innerHTML = "🔓 <b>BERHASIL SQLi!</b> Login Bypass aktif.";
-            return;
+    <script>
+        function proses() {
+            let data = document.getElementById('userInput').value;
+            
+            // TITIK KERENTANAN: Menggunakan innerHTML
+            // Ini akan membuat browser menjalankan apa pun yang diketik user sebagai kode HTML/JS
+            document.getElementById('deskripsi').innerHTML = "Halo, " + data;
         }
-
-        // --- SIMULASI CELAH XSS ---
-        // Bahaya: Menggunakan innerHTML tanpa filter
-        if (user.includes("<img") || user.includes("<script")) {
-            msg.className = "danger";
-            msg.innerHTML = "⚠️ Terdeteksi Input: " + user; // Di sini XSS akan meledak
-            return;
-        }
-
-        // Logika Login Normal
-        if (user === "admin" && pass === "raihan123") {
-            msg.className = "success";
-            msg.innerHTML = "✅ Selamat datang, Raihan!";
-        } else {
-            msg.className = "danger";
-            msg.innerHTML = "❌ Login Gagal!";
-        }
-    }
-</script>
-
+    </script>
 </body>
 </html>
-
